@@ -8,7 +8,7 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/tmpdb?currentSchema=taskdb}
     username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:root}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -28,7 +28,6 @@ spring:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:F9b3d7vA8x2Kz1pL9wO4q8jX5bN6mC3rT2vY1oP0kI9uL8jK4nJ3hM2gS1fD4cW3}
+    secret: ${JWT_SECRET}
   auth-service:
     url: ${AUTH_SERVICE_URL:http://localhost:8081}
-

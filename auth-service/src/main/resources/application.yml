@@ -8,7 +8,7 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/tmpdb?currentSchema=authdb}
     username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:root}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -28,11 +28,10 @@ spring:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:F9b3d7vA8x2Kz1pL9wO4q8jX5bN6mC3rT2vY1oP0kI9uL8jK4nJ3hM2gS1fD4cW3}
+    secret: ${JWT_SECRET}
     expiration-ms: ${JWT_EXPIRATION_MS:86400000}   # default: 24 hours
 
   admin:
-    email: ${ADMIN_EMAIL:admin@example.com}
-    password: ${ADMIN_PASSWORD:Admin@1234}
+    email:     ${ADMIN_EMAIL:admin@example.com}
+    password:  ${ADMIN_PASSWORD}
     full-name: ${ADMIN_FULL_NAME:Platform Admin}
-
