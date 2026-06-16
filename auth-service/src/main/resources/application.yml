@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/tmpdb?currentSchema=authdb}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: authdb
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:F9b3d7vA8x2Kz1pL9wO4q8jX5bN6mC3rT2vY1oP0kI9uL8jK4nJ3hM2gS1fD4cW3}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}   # default: 24 hours
+
