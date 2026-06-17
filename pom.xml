@@ -61,6 +61,18 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <!-- Flyway — versioned DB migrations, shared by all services -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
