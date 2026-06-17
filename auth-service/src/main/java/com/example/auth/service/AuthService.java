@@ -27,8 +27,6 @@ public class AuthService {
     @Value("${app.jwt.expiration-ms}")
     private long jwtExpirationMs;
 
-    // ── register ─────────────────────────────────────────────────────────────
-
     @Transactional
     public UserResponse register(RegisterRequest request) {
         String normalizedEmail = request.getEmail().toLowerCase().strip();
@@ -47,8 +45,6 @@ public class AuthService {
 
         return toResponse(userRepository.save(user));
     }
-
-    // ── login ────────────────────────────────────────────────────────────────
 
     @Transactional(readOnly = true)
     public LoginResponse login(LoginRequest request) {
