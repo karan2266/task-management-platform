@@ -9,12 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponse {
-
-    private String token;
+public class TokenRefreshResponse {
+    private String accessToken;
     private String refreshToken;
-    /** Expiry duration in milliseconds (matches JWT exp claim) */
     private long expiresIn;
-    private UserResponse user;
 }
-
