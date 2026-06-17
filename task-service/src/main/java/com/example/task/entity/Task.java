@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.Instant;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks", schema = "taskdb")
@@ -43,6 +44,9 @@ public class Task {
 
     @Column(name = "assignee_user_id")
     private UUID assigneeUserId;
+
+    @Column(name = "due_date")
+    private LocalDateTime dueDate;
 
     @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt;

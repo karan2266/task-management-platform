@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +51,7 @@ public class TaskService {
                 .status(TaskStatus.TODO)
                 .priority(request.getPriority() != null ? request.getPriority() : Priority.MEDIUM)
                 .assigneeUserId(assigneeId)
+                .dueDate(request.getDueDate())
                 .build();
 
         return toResponse(taskRepository.save(task));
@@ -81,6 +83,14 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<TaskResponse> getOverdueTasks() {
+        return taskRepository.findByDueDateBeforeAndStatusNot(LocalDateTime.now(), TaskStatus.DONE)
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public TaskResponse update(UUID projectId, UUID taskId, UpdateTaskRequest request) {
         Task task = getOrThrow(projectId, taskId);
@@ -89,6 +99,7 @@ public class TaskService {
         if (request.getPriority() != null) {
             task.setPriority(request.getPriority());
         }
+        task.setDueDate(request.getDueDate());
         return toResponse(taskRepository.save(task));
     }
 
@@ -139,6 +150,7 @@ public class TaskService {
                 .status(task.getStatus())
                 .priority(task.getPriority())
                 .assigneeUserId(task.getAssigneeUserId())
+                .dueDate(task.getDueDate())
                 .createdAt(task.getCreatedAt())
                 .updatedAt(task.getUpdatedAt())
                 .build();

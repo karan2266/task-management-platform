@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -23,6 +24,7 @@ public class TaskResponse {
     private TaskStatus status;
     private Priority priority;
     private UUID assigneeUserId;
+    private LocalDateTime dueDate;
     private Instant createdAt;
     private Instant updatedAt;
 }

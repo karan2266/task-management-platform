@@ -100,5 +100,11 @@ public class TaskController {
         UUID userId = (UUID) auth.getPrincipal();
         return taskService.getMyTasks(userId);
     }
+
+    /** Get all overdue tasks across all projects. */
+    @GetMapping("/api/v1/tasks/overdue")
+    public List<TaskResponse> getOverdueTasks() {
+        return taskService.getOverdueTasks();
+    }
 }
 
