@@ -3,7 +3,6 @@ package com.example.auth.entity;
 import com.example.auth.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -34,13 +33,15 @@ public class User {
     @Column(name = "role", nullable = false)
     private Role role;
 
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt;
 
     @Column(name = "is_active", nullable = false)
     @Builder.Default
     private boolean active = true;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = Instant.now();
+    }
 }
-
-
