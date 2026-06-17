@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task, UUID> {
 
@@ -17,5 +18,8 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
 
     /** All tasks assigned to a specific user (used for GET /api/v1/tasks/my-tasks). */
     List<Task> findByAssigneeUserId(UUID assigneeUserId);
+
+    /** Single task scoped to a project — prevents cross-project task access. */
+    Optional<Task> findByIdAndProjectId(UUID id, UUID projectId);
 }
 
